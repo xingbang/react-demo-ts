@@ -7,3 +7,11 @@ export function getBanner() {
     method: 'GET'
   });
 }
+
+// 推荐歌单 30
+export function getList() {
+  return request({
+    url: process.env.REACT_APP_API_URL + '/personalized?limit=30',
+    method: 'GET'
+  });
+}
