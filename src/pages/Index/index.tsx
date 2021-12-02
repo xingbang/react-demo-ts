@@ -3,16 +3,17 @@ import BScroll from '@better-scroll/core';
 import ScrollBar from '@better-scroll/scroll-bar';
 import { getBanner, getList } from '@src/service/api/music';
 import { useMount, useUnmount } from 'ahooks';
+import { numberInt } from '@src/utils/index';
 import Icon from '@src/commponents/Icon';
 import Slider from '@src/commponents/Slider';
+import IScrollBar from '@src/commponents/ScrollBar';
 import './index.less';
 
 const Index: React.FC = () => {
   const [banners, setBanners] = useState<any[]>([]);
-  const [list, setList] = useState<any[]>([]);
+  const [lists, setLists] = useState<any[]>([]);
 
   let scroll: any;
-  let scrollAny: any;
 
   BScroll.use(ScrollBar);
 
@@ -21,13 +22,13 @@ const Index: React.FC = () => {
       setBanners(res.banners);
     });
     getList().then((res: any) => {
-      setList(res.result);
+      setLists(res.result);
       initBscroll();
     });
-    ScrollBarInit();
+
   }, []);
 
-  const ScrollBarInit = () => {
+  const initBscroll = () => {
     scroll = new BScroll('.scroll-wrapper', {
       scrollX: true,
       scrollY: false,
@@ -35,26 +36,23 @@ const Index: React.FC = () => {
       probeType: 1,
       scrollbar: true
     });
+
     scroll.on('scrollEnd', () => {
       console.log('scrollEnd');
     });
+
     scroll.on('scrollStart', () => {
       console.log('scrollStart');
     });
+
     scroll.on('scroll', () => {
       console.log('scroll');
     });
-  };
 
-  const initBscroll = () => {
-    scrollAny = new BScroll('.scrollbar-wrapper', {
-      scrollY: true,
-      scrollbar: true
-    });
   };
 
   return (
-    <>
+    <div style={{ maxWidth: '750px', margin: '0 auto' }}>
       <Slider banners={banners}></Slider>
 
       <div className="horizontal-scrollbar-container">
@@ -85,27 +83,27 @@ const Index: React.FC = () => {
       </div>
 
       <h5>推荐歌单</h5>
-      <div className="scrollbar">
-        <div className="scrollbar-wrapper">
-          <ul className="scrollbar-content">
-            {list &&
-              list.map((item, index) => {
-                return (
-                  <li className="scrollbar-content-item" key={index}>
+      <IScrollBar fixedTop="300px" >
+        <div className="song-list">
+          {
+            lists && lists.map(item => {
+              return (
+                <div className="song-li" key={item.id}>
+                  <div className="song-list-img">
                     <img src={item.picUrl} />
-                    <div className="scrollbar-list">
-                      <div className="scrollbar-name">{item.name}</div>
-                      <div className="scrollbar-span">
-                        播放量：{item.playCount}，点击亮：{item.trackCount}
-                      </div>
+                    <div className="song-list-icon">
+                      <Icon name="play-b" />
+                      <div>&nbsp;{numberInt(item.playCount, 0)}</div>
                     </div>
-                  </li>
-                );
-              })}
-          </ul>
+                  </div>
+                  <div className="song-list-tit">{item.name}</div>
+                </div>
+              )
+            })
+          }
         </div>
-      </div>
-    </>
+      </IScrollBar>
+    </div>
   );
 };
 

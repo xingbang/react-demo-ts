@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getSession } from '@src/utils';
 
 const Request = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  // baseURL: 'process.env.REACT_APP_API_URL',
   timeout: 6000
 });
 
@@ -12,6 +12,7 @@ Request.interceptors.request.use(
     if (getSession('TOKEN')) {
       config.headers['Authorization'] = 'Bearer ' + getSession('TOKEN');
     }
+    // config.headers['withCredentials'] = true;
     return config;
   },
   (error) => {

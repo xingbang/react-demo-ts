@@ -10,9 +10,9 @@ const Slider = (props: { banners: any[] }) => {
   BScroll.use(Slide);
 
   useEffect(() => {
-    banners.length > 0 ? init() : '';
+    banners && banners.length > 0 ? init() : '';
     return () => {
-      banners.length > 0 ? destroy() : '';
+      banners && banners.length > 0 ? destroy() : '';
     };
   }, [banners]);
 
@@ -63,8 +63,10 @@ const Slider = (props: { banners: any[] }) => {
             {banners &&
               banners.map((item, index) => {
                 return (
-                  <div className={`slide-page page${index}`} key={index} style={{ backgroundImage: `url(${item.pic})` }}>
-                    <a href={item.url}></a>
+                  <div className={`slide-page page${index}`} key={index}>
+                    <div style={{ backgroundImage: `url(${item.pic})` }}>
+                      <a href={item.url}></a>
+                    </div>
                   </div>
                 );
               })}

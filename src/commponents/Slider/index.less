@@ -1,20 +1,24 @@
 .slide-banner {
   .banner-wrapper {
     position: relative;
-    margin: 4%;
   }
   .slide-banner-wrapper {
     border-radius: 14px;
     overflow: hidden;
   }
   .slide-banner-content {
-    height: 150px;
     .slide-page {
       display: inline-block;
-      height: 150px;
       width: 100%;
-      background-size: cover;
-      background-position: center;
+      div {
+        height: 150px;
+        width: 92%;
+        background-size: cover;
+        background-position: center;
+        border-radius: 14px;
+        overflow: hidden;
+        margin: 4% 4% 2% 4%;
+      }
       a {
         height: 100%;
         display: block;
@@ -23,7 +27,7 @@
   }
   .dots-wrapper {
     position: absolute;
-    bottom: 4px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     .dot {
