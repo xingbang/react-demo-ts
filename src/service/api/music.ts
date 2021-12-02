@@ -15,3 +15,11 @@ export function getList() {
     method: 'GET'
   });
 }
+
+// 歌单详情
+export function getDetail() {
+  return request({
+    url: '/playlist/detail?id=7096659611',
+    method: 'GET'
+  });
+}

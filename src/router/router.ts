@@ -12,12 +12,18 @@ export interface MenuDataItem {
 }
 
 const Index = lazy(() => import('@src/pages/Index'));
+const MusicList = lazy(() => import('@src/pages/MusicList'));
 
 const menuData: MenuDataItem[] = [
   {
     name: '首页',
     path: '/index',
     component: Index
+  },
+  {
+    name: '歌单详情',
+    path: '/music-list',
+    component: MusicList
   }
 ];
 

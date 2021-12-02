@@ -4,6 +4,7 @@ import ScrollBar from '@better-scroll/scroll-bar';
 import { getBanner, getList } from '@src/service/api/music';
 import { useMount, useUnmount } from 'ahooks';
 import { numberInt } from '@src/utils/index';
+import { Link, withRouter } from 'react-router-dom';
 import Icon from '@src/commponents/Icon';
 import Slider from '@src/commponents/Slider';
 import IScrollBar from '@src/commponents/ScrollBar';
@@ -89,14 +90,16 @@ const Index: React.FC = () => {
             lists && lists.map(item => {
               return (
                 <div className="song-li" key={item.id}>
-                  <div className="song-list-img">
-                    <img src={item.picUrl} />
-                    <div className="song-list-icon">
-                      <Icon name="play-b" />
-                      <div>&nbsp;{numberInt(item.playCount, 0)}</div>
+                  <Link to="/music-list">
+                    <div className="song-list-img">
+                      <img src={item.picUrl} />
+                      <div className="song-list-icon">
+                        <Icon name="play-b" />
+                        <div>&nbsp;{numberInt(item.playCount, 0)}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="song-list-tit">{item.name}</div>
+                    <div className="song-list-tit">{item.name}</div>
+                  </Link>
                 </div>
               )
             })
@@ -107,4 +110,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default withRouter(Index);

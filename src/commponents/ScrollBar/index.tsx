@@ -19,7 +19,8 @@ const IScrollBar: React.FC<ScrollProps> = (props) => {
   const ScrollBarInit = () => {
     scroll = new BScroll('.scrollbar-wrapper', {
       scrollY: true,
-      scrollbar: true
+      scrollbar: true,
+      click: true,
     });
   };
 
