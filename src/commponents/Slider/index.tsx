@@ -29,13 +29,13 @@ const Slider = (props: { banners: any[] }) => {
     slide.on('scrollEnd', _onScrollEnd);
 
     slide.on('slideWillChange', (page: any) => {
-      console.log('CurrentPage changed to => ', page);
+      // console.log('CurrentPage changed to => ', page);
       setCurrentPageIndex(page.pageX);
     });
 
     // v2.1.0
     slide.on('slidePageChanged', (page: any) => {
-      console.log('CurrentPage changed to => ', page);
+      // console.log('CurrentPage changed to => ', page);
     });
   };
 
@@ -52,7 +52,7 @@ const Slider = (props: { banners: any[] }) => {
   };
 
   const _onScrollEnd = () => {
-    console.log('CurrentPage => ', slide.getCurrentPage());
+    // console.log('CurrentPage => ', slide.getCurrentPage());
   };
 
   return (

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import BScroll from '@better-scroll/core';
 import ScrollBar from '@better-scroll/scroll-bar';
+import { Context } from '@src/store/CustomProvider';
 import { getBanner, getList } from '@src/service/api/music';
 import { useMount, useUnmount } from 'ahooks';
 import { numberInt } from '@src/utils/index';
@@ -12,8 +13,8 @@ import './index.less';
 
 const Index: React.FC = () => {
   const [banners, setBanners] = useState<any[]>([]);
-  const [lists, setLists] = useState<any[]>([]);
-
+  const { _state, _dispatch } = useContext(Context);
+  const { songList } = _state;
   let scroll: any;
 
   BScroll.use(ScrollBar);
@@ -23,7 +24,7 @@ const Index: React.FC = () => {
       setBanners(res.banners);
     });
     getList().then((res: any) => {
-      setLists(res.result);
+      _dispatch({ songList: res.result });
       initBscroll();
     });
 
@@ -87,10 +88,10 @@ const Index: React.FC = () => {
       <IScrollBar fixedTop="300px" >
         <div className="song-list">
           {
-            lists && lists.map(item => {
+            songList && songList.map((item: any) => {
               return (
                 <div className="song-li" key={item.id}>
-                  <Link to="/music-list">
+                  <Link to="/music-list" onClick={() => _dispatch({ songId: item.id })}>
                     <div className="song-list-img">
                       <img src={item.picUrl} />
                       <div className="song-list-icon">

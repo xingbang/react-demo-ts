@@ -17,9 +17,19 @@ export function getList() {
 }
 
 // 歌单详情
-export function getDetail() {
+export function getDetail(params: { id: string }) {
   return request({
-    url: '/playlist/detail?id=7096659611',
-    method: 'GET'
+    url: '/playlist/detail',
+    method: 'GET',
+    params
+  });
+}
+
+// 歌曲详情
+export function getMusicDetail(params: { id: string }) {
+  return request({
+    url: '/song/url',
+    method: 'GET',
+    params
   });
 }

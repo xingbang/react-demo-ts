@@ -2,9 +2,18 @@
   .scrollbar-wrapper {
     position: fixed;
     // width: 100%;
+    left: 0;
+    right: 0;
     top: 300px;
     bottom: 0;
     overflow: hidden;
+    .scrollbar-content {
+      width: 100%;
+      background: #fff;
+    }
+    .bscroll-vertical-scrollbar {
+      transform: translateZ(100px);
+    }
   }
   // .scrollbar-content {
   //   padding: 0 10px;

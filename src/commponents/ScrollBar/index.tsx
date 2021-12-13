@@ -14,6 +14,7 @@ const IScrollBar: React.FC<ScrollProps> = (props) => {
 
   useEffect(() => {
     ScrollBarInit()
+    return () => destroy();
   }, [children]);
 
   const ScrollBarInit = () => {
@@ -24,11 +25,18 @@ const IScrollBar: React.FC<ScrollProps> = (props) => {
     });
   };
 
+  const destroy = () => {
+    scroll.destroy();
+  };
+
   return (
     <div className="scrollbar">
       <div className="scrollbar-wrapper" style={{ top: fixedTop }}>
-        {children}
-        {/* <ul className="scrollbar-content">
+        <div className="scrollbar-content">
+          {children}
+        </div>
+      </div>
+      {/* <ul className="scrollbar-content">
           {lists &&
             lists.map((item: any, index: number) => {
               return (
@@ -44,7 +52,6 @@ const IScrollBar: React.FC<ScrollProps> = (props) => {
               );
             })}
         </ul> */}
-      </div>
     </div>
   );
 };
